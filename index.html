@@ -2,59 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Order System</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; max-width: 400px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        select, input, textarea { width: 100%; padding: 8px; box-sizing: border-box; }
-        button { background-color: #28a745; color: white; padding: 10px; border: none; width: 100%; cursor: pointer; font-size: 16px; }
-        button:hover { background-color: #218838; }
-    </style>
+    <title>Food Order Form</title>
 </head>
 <body>
-
     <h2>Place Your Food Order</h2>
-    
-    <div class="form-group">
-        <label for="food">Select Main Dish:</label>
-        <select id="food">
-            <option value="Pepperoni Pizza">Pepperoni Pizza</option>
-            <option value="Cheeseburger & Fries">Cheeseburger & Fries</option>
-            <option value="Chicken Caesar Salad">Chicken Caesar Salad</option>
-        </select>
-    </div>
+    <form action="send_order.php" method="POST">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
 
-    <div class="form-group">
-        <label for="instructions">Special Instructions:</label>
-        <textarea id="instructions" rows="3" placeholder="No onions, extra sauce, etc."></textarea>
-    </div>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
 
-    <button onclick="sendOrder()">Send Order via Email</button>
+        <label for="food">Select Food Item:</label><br>
+        <select id="food" name="food">
+            <option value="Pizza">Pizza</option>
+            <option value="Burger">Burger</option>
+            <option value="Sushi">Sushi</option>
+        </select><br><br>
 
-    <script>
-        function sendOrder() {
-            // Configuration
-            const businessEmail = "aaaaakom@gmail.com";
-            
-            // Get form values
-            const foodItem = document.getElementById('food').value;
-            const instructions = document.getElementById('instructions').value || "None";
-            
-            // Construct email content
-            const subject = encodeURIComponent("New Food Order");
-            const body = encodeURIComponent(
-                `Hello,\n\nI would like to place the following order:\n\n` +
-                `- Item: ${foodItem}\n` +
-                `- Special Instructions: ${instructions}\n\n` +
-                `Please confirm receipt of this order.\nThank you!`
-            );
-            
-            // Generate mailto link and trigger it
-            window.location.href = `mailto:${businessEmail}?subject=${subject}&body=${body}`;
-        }
-    </script>
+        <label for="quantity">Quantity:</label><br>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required><br><br>
 
+        <button type="submit" name="submit">Send Order</button>
+    </form>
 </body>
 </html>
