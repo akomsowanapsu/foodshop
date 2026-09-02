@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
     $quantity = htmlspecialchars($_POST['quantity']);
 
     // Define recipient and subject
-    $to = "aaaaakom@gmail.com"; // Change to your email
+    $to = "akom.s@psu.ac.th"; // Change to your email
     $subject = "New Food Order from " . $name;
 
     // Build HTML email header
