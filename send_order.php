@@ -1,37 +1,49 @@
 <?php
-if (isset($_POST['submit'])) {
-    // Collect and sanitize input data
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// Download PHPMailer from GitHub and include these files
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = htmlspecialchars($_POST['name']);
-    $email = htmlspecialchars($_POST['email']);
     $food = htmlspecialchars($_POST['food']);
-    $quantity = htmlspecialchars($_POST['quantity']);
+    $address = htmlspecialchars($_POST['address']);
 
-    // Define recipient and subject
-    $to = "akom.s@psu.ac.th"; // Change to your email
-    $subject = "New Food Order from " . $name;
+    $mail = new PHPMailer(true);
 
-    // Build HTML email header
-    $headers = "MIME-Version: 1.0" . "\r\n";
-    $headers .= "Content-Type:text/html;charset=UTF-8" . "\r\n";
-    $headers .= "From: " . $email . "\r\n";
+    try {
+        // SMTP Server Settings
+        $mail->isSMTP();
+        $mail->Host       = '://gmail.com';             // Use your SMTP provider
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'your_email@gmail.com';       // Your email
+        $mail->Password   = 'your_app_password';          // Your app password (not your login password)
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
 
-    // Build HTML email body
-    $message = "<html><body>";
-    $message .= "<h2>New Food Order Received</h2>";
-    $message .= "<p><strong>Customer Name:</strong> " . $name . "</p>";
-    $message .= "<p><strong>Customer Email:</strong> " . $email . "</p>";
-    $message .= "<p><strong>Food Item:</strong> " . $food . "</p>";
-    $message .= "<p><strong>Quantity:</strong> " . $quantity . "</p>";
-    $message .= "</body></html>";
+        // Recipients
+        $mail->setFrom('your_email@gmail.com', 'Food App');
+        $mail->addAddress('restaurant_owner@gmail.com');  // Where the order goes
 
-    // Send the email
-    if (mail($to, $subject, $message, $headers)) {
-        echo "<h3>Thank you! Your order has been sent successfully.</h3>";
-    } else {
-        echo "<h3>Sorry, something went wrong. Please try again later.</h3>";
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = "New Food Order from $name";
+        $mail->Body    = "
+            <h3>New Order Details</h3>
+            <p><strong>Customer Name:</strong> $name</p>
+            <p><strong>Food Ordered:</strong> $food</p>
+            <p><strong>Delivery Address:</strong> $address</p>
+        ";
+
+        $mail->send();
+        echo 'Order sent successfully!';
+    } catch (Exception $e) {
+        echo "Order could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 } else {
-    header("Location: order.html");
-    exit();
+    echo "Invalid Request";
 }
 ?>
