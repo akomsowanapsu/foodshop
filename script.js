@@ -1,7 +1,7 @@
-const GITHUB_TOKEN = 'YOUR_PERSONAL_ACCESS_TOKEN'; // Keep secure!
-const OWNER = 'YOUR_GITHUB_USERNAME';
-const REPO = 'YOUR_REPOSITORY_NAME';
-const FILE_PATH = 'checkbox_status.txt'; // Saves directly to the main folder
+const GITHUB_TOKEN = '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'; // Keep secure!
+const OWNER = 'akomsowanapsu';
+const REPO = 'foodshop';
+const FILE_PATH = 'order.txt'; // Saves directly to the main folder
 
 async function saveToGitHub() {
     const isChecked = document.getElementById('myCheckbox').checked;
