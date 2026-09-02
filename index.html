@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Text to LINE</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 400px; margin: auto; }
+        textarea { width: 100%; height: 100px; margin-bottom: 10px; }
+        button { padding: 10px 15px; font-size: 16px; cursor: pointer; background-color: #06C755; color: white; border: none; border-radius: 5px; margin-right: 5px;}
+        .save-btn { background-color: #007BFF; }
+    </style>
+</head>
+<body>
+
+    <h2>LINE Text Sender</h2>
+    
+    <!-- Input Field -->
+    <textarea id="myTextInput" placeholder="Type your text here..."></textarea>
+    <br>
+    
+    <!-- Action Buttons -->
+    <button class="save-btn" onclick="saveText()">Save Text</button>
+    <button onclick="sendToLine()">Send to LINE</button>
+
+    <script>
+        // Load previously saved text when page opens
+        window.onload = function() {
+            const savedText = localStorage.getItem("savedLineText");
+            if (savedText) {
+                document.getElementById("myTextInput").value = savedText;
+            }
+        };
+
+        // Save text to LocalStorage
+        function saveText() {
+            const textValue = document.getElementById("myTextInput").value;
+            localStorage.setItem("savedLineText", textValue);
+            alert("Text saved successfully!");
+        }
+
+        // Send the text to LINE app
+        function sendToLine() {
+            const textValue = document.getElementById("myTextInput").value;
+            
+            if (!textValue.trim()) {
+                alert("Please enter or save some text first.");
+                return;
+            }
+
+            // Encode the text to make it URL-safe
+            const encodedText = encodeURIComponent(textValue);
+            
+            // Generate the LINE URL Scheme scheme
+            const lineUrl = `https://line.me{encodedText}`;
+            
+            // Open the LINE application
+            window.open(lineUrl, '_blank');
+        }
+    </script>
+
+</body>
+</html>
