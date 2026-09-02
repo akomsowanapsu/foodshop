@@ -1,0 +1,50 @@
+const GITHUB_TOKEN = 'YOUR_PERSONAL_ACCESS_TOKEN'; // Keep secure!
+const OWNER = 'YOUR_GITHUB_USERNAME';
+const REPO = 'YOUR_REPOSITORY_NAME';
+const FILE_PATH = 'checkbox_status.txt'; // Saves directly to the main folder
+
+async function saveToGitHub() {
+    const isChecked = document.getElementById('myCheckbox').checked;
+    const content = `Checkbox value: ${isChecked}`;
+    
+    // Base64 encode content (required by GitHub API)
+    const encodedContent = btoa(content); 
+    const url = `https://github.com{OWNER}/${REPO}/contents/${FILE_PATH}`;
+
+    let sha = "";
+
+    // Step 1: Check if file already exists to retrieve its SHA
+    try {
+        const response = await fetch(url, {
+            headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
+        });
+        if (response.ok) {
+            const data = await response.json();
+            sha = data.sha; // Required if updating an existing file
+        }
+    } catch (error) {
+        console.log("File does not exist yet. Creating a new one.");
+    }
+
+    // Step 2: Push the new value to GitHub
+    const body = {
+        message: `Update checkbox status to ${isChecked}`,
+        content: encodedContent,
+    };
+    if (sha) body.sha = sha; // Include SHA if updating
+
+    const saveResponse = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `token ${GITHUB_TOKEN}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    });
+
+    if (saveResponse.ok) {
+        alert('Value successfully saved to GitHub main folder!');
+    } else {
+        alert('Failed to save to GitHub.');
+    }
+}
