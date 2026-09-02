@@ -19,14 +19,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->isSMTP();
         $mail->Host       = '://gmail.com';             // Use your SMTP provider
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'your_email@gmail.com';       // Your email
-        $mail->Password   = 'your_app_password';          // Your app password (not your login password)
+        $mail->Username   = 'akom.s@psu.ac.th';       // Your email
+        $mail->Password   = 'Sowana12345678#';          // Your app password (not your login password)
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
 
         // Recipients
-        $mail->setFrom('your_email@gmail.com', 'Food App');
-        $mail->addAddress('restaurant_owner@gmail.com');  // Where the order goes
+        $mail->setFrom('yakom.s@psu.ac.th', 'Food App');
+        $mail->addAddress('aaaaakom@gmail.com');  // Where the order goes
 
         // Content
         $mail->isHTML(true);
