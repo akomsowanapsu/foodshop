@@ -76,7 +76,7 @@
             checkboxes.forEach((chk) => {
                 if (chk.checked) {
                     const parentDiv = chk.closest('.sub-col');
-                    const textInputs = parentDiv.querySelectorAll('input[type="text"]');
+                    const textInputs = parentDiv.querySelectorAll('input[type="text, input[type="number"]"]');                    
                     let textValues = Array.from(textInputs).map(input => input.value || '[empty]').join(', ');
                     message += `- ${chk.value}: ${textValues}\n`;
                 }
