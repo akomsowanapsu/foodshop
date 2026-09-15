@@ -27,7 +27,6 @@ html<!DOCTYPE html>
   <table border="1" cellpadding="8">
     <thead>
       <tr>
-        <th>Menu</th>
         <th>Select</th>
         <th>Item</th>
         <th>Details / Value</th>
@@ -35,20 +34,16 @@ html<!DOCTYPE html>
     </thead>
     <tbody>
       <tr>
-        <td> picture 1 </td>
         <td><input type="checkbox" name="item" value="Apple"></td>
         <td>Apple</td>
         <td><input type="text" name="details" placeholder="Enter quantity or note"></td>
       </tr>
       <tr>
-        <td> picture 2 </td>
         <td><input type="checkbox" name="item" value="Banana"></td>
         <td>Banana</td>
         <td><input type="text" name="details" placeholder="Enter quantity or note"></td>
-          
       </tr>
       <tr>
-        <td> picture 3 </td>
         <td><input type="checkbox" name="item" value="Orange"></td>
         <td>Orange</td>
         <td><input type="text" name="details" placeholder="Enter quantity or note"></td>
@@ -69,9 +64,7 @@ function saveToMessage() {
   
   rows.forEach(row => {
     const checkbox = row.querySelector('input[type="checkbox"]');
-    const textbox = row.querySelector('input[type="number"]');
-   // let orderQuNumber = document.getElementById("numInput").value;
-   // const textbox = row.querySelector('input[type="text"]');
+    const textbox = row.querySelector('input[type="text"]');
     
     if (checkbox.checked) {
       message += `- ${checkbox.value}: ${textbox.value || "No details"}\n`;
@@ -81,7 +74,6 @@ function saveToMessage() {
   document.getElementById("outputMessage").value = message;
 }
 </script>
-
     
 
 </body>
