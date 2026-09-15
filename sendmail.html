@@ -1,0 +1,28 @@
+html<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save and Send Textbox</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .form-container { max-width: 400px; }
+        textarea { width: 100%; height: 150px; margin-bottom: 10px; padding: 10px; }
+        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Send Message to Email</h2>
+        <!-- REPLACE THE ACTION URL WITH YOUR FORMSPREE ENDPOINT -->
+        <form action="https://formspree.io" method="POST">
+            <label for="message">Your Message:</label>
+            <textarea id="message" name="message" placeholder="Type something here..." required></textarea>
+            <button type="submit">Send to Email</button>
+        </form>
+    </div>
+
+</body>
+</html>
