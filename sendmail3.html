@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Entry Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .main-col {
+            width: 50%;
+        }
+        .sub-col {
+            margin-bottom: 8px;
+        }
+        .sub-col label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        input[type="text"] {
+            width: 90%;
+            padding: 6px;
+            margin-bottom: 4px;
+            display: block;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #outputMessage {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-left: 5px solid #007BFF;
+            white-space: pre-wrap;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Data Entry Form</h2>
+    
+    <form id="dataForm">
+        <table>
+            <thead>
+                <tr>
+                    <th class="main-col">Main Column 1</th>
+                    <th class="main-col">Main Column 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!-- Main Column 1 -->
+                    <td>
+                        <!-- Sub Column 1 -->
+                        <div class="sub-col">
+                            <label><input type="checkbox" name="col1_sub1_check"> Sub Section A</label>
+                            <input type="text" name="col1_sub1_val1" placeholder="Value 1">
+                            <input type="text" name="col1_sub1_val2" placeholder="Value 2">
+                        </div>
+                        <hr>
+                        <!-- Sub Column 2 -->
+                        <div class="sub-col">
+                            <label><input type="checkbox" name="col1_sub2_check"> Sub Section B</label>
+                            <input type="text" name="col1_sub2_val1" placeholder="Value 1">
+                            <input type="text" name="col1_sub2_val2" placeholder="Value 2">
+                        </div>
+                        <hr>
+                        <!-- Sub Column 3 -->
+                        <div class="sub-col">
+                            <label><input type="checkbox" name="col1_sub3_check"> Sub Section C</label>
+                            <input type="text" name="col1_sub3_val1" placeholder="Value 1">
+                            <input type="text" name="col1_sub3_val2" placeholder="Value 2">
+                        </div>
+                    </td>
+
+                    <!-- Main Column 2 -->
+                    <td>
+                        <!-- Sub Column 1 -->
+                        <div class="sub-col">
+                            <label><input type="checkbox" name="col2_sub1_check"> Sub Section D</label>
+                            <input type="text" name="col2_sub1_val1" placeholder="Value 1">
+                            <input type="text" name="col2_sub1_val2" placeholder="Value 2">
+                        </div>
+                        <hr>
+                        <!-- Sub Column 2 -->
+                        <div class="sub-col">
+                            <label><input type="checkbox" name="col2_sub2_check"> Sub Section E</label>
+                            <input type="text" name="col2_sub2_val1" placeholder="Value 1">
+                            <input type="text" name="col2_sub2_val2" placeholder="Value 2">
+                        </div>
+                        <hr>
+                        <!-- Sub Column 3 -->
+                        <div class="sub-col">
+                            <label><input type="checkbox" name="col2_sub3_check"> Sub Section F</label>
+                            <input type="text" name="col2_sub3_val1" placeholder="Value 1">
+                            <input type="text" name="col2_sub3_val2" placeholder="Value 2">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button type="button" onclick="saveToMessage()">Save to Message</button>
+    </form>
+
+    <div id="outputMessage"></div>
+
+    <script>
+        function saveToMessage() {
+            const form = document.getElementById('dataForm');
+            const formData = new FormData(form);
+            let message = "Saved Form Data:\n\n";
+
+            // Structure to map and parse the form fields easily
+            const structure = [
+                { main: "Main Column 1", subs: [
+                    { name: "Sub Section A", check: "col1_sub1_check", inputs: ["col1_sub1_val1", "col1_sub1_val2"] },
+                    { name: "Sub Section B", check: "col1_sub2_check", inputs: ["col1_sub2_val1", "col1_sub2_val2"] },
+                    { name: "Sub Section C", check: "col1_sub3_check", inputs: ["col1_sub3_val1", "col1_sub3_val2"] }
+                ]},
+                { main: "Main Column 2", subs: [
+                    { name: "Sub Section D", check: "col2_sub1_check", inputs: ["col2_sub1_val1", "col2_sub1_val2"] },
+                    { name: "Sub Section E", check: "col2_sub2_check", inputs: ["col2_sub2_val1", "col2_sub2_val2"] },
+                    { name: "Sub Section F", check: "col2_sub3_check", inputs: ["col2_sub3_val1", "col2_sub3_val2"] }
+                ]}
+            ];
+
+            structure.forEach(column => {
+                message += `=== ${column.main} ===\n`;
+                column.subs.forEach(sub => {
+                    const isChecked = formData.get(sub.check) ? "Checked" : "Unchecked";
+                    message += `  [${isChecked}] ${sub.name}:\n`;
+                    
+                    sub.inputs.forEach((inputName, index) => {
+                        const val = formData.get(inputName) || "Empty";
+                        message += `    - Value ${index + 1}: ${val}\n`;
+                    });
+                });
+                message += "\n";
+            });
+
+            const outputDiv = document.getElementById('outputMessage');
+            outputDiv.innerText = message;
+            outputDiv.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
