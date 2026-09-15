@@ -34,20 +34,7 @@
                             <input type="text" name="txt1_b" placeholder="Val B">
                         </div>
                     </td>
-                    <td>
-                        <div class="sub-col">
-                            <input type="checkbox" name="chk2" value="Item 2">
-                            <input type="text" name="txt2_a" placeholder="Val A">
-                            <input type="text" name="txt2_b" placeholder="Val B">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="sub-col">
-                            <input type="checkbox" name="chk3" value="Item 3">
-                            <input type="text" name="txt3_a" placeholder="Val A">
-                            <input type="text" name="txt3_b" placeholder="Val B">
-                        </div>
-                    </td>
+                    
 
                     <!-- 3 Sub-columns for Main Column 2 -->
                     <td>
@@ -57,20 +44,8 @@
                             <input type="text" name="txt4_b" placeholder="Val B">
                         </div>
                     </td>
-                    <td>
-                        <div class="sub-col">
-                            <input type="checkbox" name="chk5" value="Item 5">
-                            <input type="text" name="txt5_a" placeholder="Val A">
-                            <input type="text" name="txt5_b" placeholder="Val B">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="sub-col">
-                            <input type="checkbox" name="chk6" value="Item 6">
-                            <input type="text" name="txt6_a" placeholder="Val A">
-                            <input type="text" name="txt6_b" placeholder="Val B">
-                        </div>
-                    </td>
+                
+                   
                 </tr>
             </tbody>
         </table>
@@ -96,6 +71,7 @@
                     let textValues = Array.from(textInputs).map(input => input.value || '[empty]').join(', ');
                     message += `- ${chk.value}: ${textValues}\n`;
                 }
+                
             });
 
             document.getElementById('outputMessage').value = message;
