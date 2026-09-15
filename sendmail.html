@@ -23,6 +23,59 @@ html<!DOCTYPE html>
             <button type="submit">Send to Email</button>
         </form>
     </div>
+<form id="dataForm">
+  <table border="1" cellpadding="8">
+    <thead>
+      <tr>
+        <th>Select</th>
+        <th>Item</th>
+        <th>Details / Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="checkbox" name="item" value="Apple"></td>
+        <td>Apple</td>
+        <td><input type="text" name="details" placeholder="Enter quantity or note"></td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" name="item" value="Banana"></td>
+        <td>Banana</td>
+        <td><input type="text" name="details" placeholder="Enter quantity or note"></td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" name="item" value="Orange"></td>
+        <td>Orange</td>
+        <td><input type="text" name="details" placeholder="Enter quantity or note"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <button type="button" onclick="saveToMessage()">Save to Message</button>
+</form>
+
+<h3>Saved Message:</h3>
+<textarea id="outputMessage" rows="6" cols="40" readonly></textarea>
+
+<script>
+function saveToMessage() {
+  const rows = document.querySelectorAll("#dataForm tbody tr");
+  let message = "Selected Items:\n";
+  
+  rows.forEach(row => {
+    const checkbox = row.querySelector('input[type="checkbox"]');
+    const textbox = row.querySelector('input[type="text"]');
+    
+    if (checkbox.checked) {
+      message += `- ${checkbox.value}: ${textbox.value || "No details"}\n`;
+    }
+  });
+  
+  document.getElementById("outputMessage").value = message;
+}
+</script>
+
+    
 
 </body>
 </html>
