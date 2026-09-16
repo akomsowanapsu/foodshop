@@ -103,14 +103,14 @@
            var combined = text1 + text2; 
            //alert(combined);
             document.getElementById('orderAndaddress').value =combined;
-
-           const source1 = document.getElementById('orderAndaddress');
-            alert("test");
-            var destination1 = document.getElementById('order');
+            const source1 = document.getElementById("orderAndaddress");
+            const sourceValue = source1.value;
+            alert("sourceValue");
+            const destination1 = document.getElementById('order');
 
             // Updates the second textarea in real-time as you type in the first
             source.addEventListener('input', () => {
-               destination1.value = source1.value;
+               destination1.value = sourceValue;
               });
         
          }   
