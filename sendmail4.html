@@ -93,6 +93,14 @@
            var combined = text1 + text2; 
            //alert(combined);
             document.getElementById('orderAndaddress').value =combined
+
+            const source = document.getElementById('orderAndaddress');
+            const destination = document.getElementById('order');
+
+            // Updates the second textarea in real-time as you type in the first
+            source.addEventListener('input', () => {
+               destination.value = source.value;
+              });
         
          }   
     </script>
@@ -101,9 +109,9 @@
         <h2>Send Message to Email</h2>
         <!-- REPLACE THE ACTION URL WITH YOUR FORMSPREE ENDPOINT -->
         <form action="https://formspree.io/f/mrpgnvyv" method="POST">
-            <label for="message">Your Message:</label>
-            <textarea id="message" name="message" placeholder="Type something here..." required></textarea>
-            <button type="submit">Send to Email</button>
+            <label for="order">Your order:</label>
+            <textarea id="order" name="order" placeholder="Waiting for text ..." ></textarea>
+            <button type="submit">Send order to Email</button>
         </form>
     </div>
     
