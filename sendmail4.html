@@ -106,12 +106,13 @@
             const source1 = document.getElementById("orderAndaddress");
             const sourceValue = source1.value;
             alert(sourceValue);
-            const destination1 = document.getElementById('order');
+            document.getElementById('order').value = sourceValue;
+           // const destination1 = document.getElementById('order');
 
             // Updates the second textarea in real-time as you type in the first
-            source.addEventListener('input', () => {
-               destination1.value = sourceValue;
-              });
+           // source.addEventListener('input', () => {
+           //    destination1.value = sourceValue;
+           //   });
         
          }   
     </script>
