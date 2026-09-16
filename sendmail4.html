@@ -83,12 +83,12 @@
             });
        }
             document.getElementById('outputMessage').value = message;
-            const text1 = document.getElementById("outputMessage").value;
-             const text2 = document.getElementById("address").value;
+            var text1 = document.getElementById("outputMessage").value;
+             var text2 = document.getElementById("address").value;
 
     // 2. Concatenate them with a space in between
     // Option A: Template Literals (Recommended)
-    const combined = `${text1} ${text2}`; 
+    var combined = text1 + text2; 
         alert(combined);
     </script>
 
