@@ -68,6 +68,16 @@
          </div>
     </form>
 
+   <div class="form-container">
+        <h2>Send Message to Email</h2>
+        <!-- REPLACE THE ACTION URL WITH YOUR FORMSPREE ENDPOINT -->
+        <form action="https://formspree.io/f/mrpgnvyv" method="POST">
+            <label for="order">Your order:</label>
+            <textarea id="order" name="order" placeholder="Waiting for text ..." ></textarea>
+            <button type="submit">Send order to Email</button>
+        </form>
+    </div>
+    
     <script>
         function saveToMessage() {
             const form = document.getElementById('myForm');
@@ -105,15 +115,7 @@
          }   
     </script>
 
-   <div class="form-container">
-        <h2>Send Message to Email</h2>
-        <!-- REPLACE THE ACTION URL WITH YOUR FORMSPREE ENDPOINT -->
-        <form action="https://formspree.io/f/mrpgnvyv" method="POST">
-            <label for="order">Your order:</label>
-            <textarea id="order" name="order" placeholder="Waiting for text ..." ></textarea>
-            <button type="submit">Send order to Email</button>
-        </form>
-    </div>
+
     
 </body>
 </html>
