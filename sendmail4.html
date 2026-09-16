@@ -63,7 +63,9 @@
         <label for="address">Delivery Address:</label><br>
         <textarea id="address" name="address" required></textarea><br><br>
          </div>
-        
+        <label for="orderAndaddress">Delivery Address:</label><br>
+        <textarea id="orderAndaddress" name="orderAndaddress" required></textarea><br><br>
+         </div>
     </form>
 
     <script>
@@ -89,8 +91,9 @@
             // 2. Concatenate them with a space in between
            // Option A: Template Literals (Recommended)
            var combined = text1 + text2; 
-           alert(combined);
-            
+           //alert(combined);
+            document.getElementById('orderAndaddress').value =combined
+        
          }   
     </script>
 
