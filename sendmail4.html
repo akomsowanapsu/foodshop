@@ -104,13 +104,13 @@
            //alert(combined);
             document.getElementById('orderAndaddress').value =combined;
 
-            var source = document.getElementById('orderAndaddress');
-            alert(orderAndaddress);
-            var destination = document.getElementById('order');
+           const source1 = document.getElementById('orderAndaddress');
+            alert(source1);
+            var destination1 = document.getElementById('order');
 
             // Updates the second textarea in real-time as you type in the first
             source.addEventListener('input', () => {
-               destination.value = source.value;
+               destination1.value = source1.value;
               });
         
          }   
